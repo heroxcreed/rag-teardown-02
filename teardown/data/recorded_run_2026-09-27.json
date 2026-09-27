@@ -1,0 +1,484 @@
+{
+  "meta": {
+    "model": "deepseek-chat",
+    "temperature": 0.7,
+    "runs_per_question": 3,
+    "date": "2026-09-27",
+    "corpus": "vibrantlabsai/ragas docs (public), 133 files",
+    "questions": [
+      "F1",
+      "M1",
+      "E1",
+      "S1",
+      "C1",
+      "R1",
+      "T1",
+      "X1",
+      "A1",
+      "V1"
+    ],
+    "human_review": "Deterministic 'verdict' is raw pipeline output. 'reviewed_verdict' is the human-reviewed final (8 runs corrected: C1 x3, X1 run3, A1 run1, V1 x3). See NOTES.md."
+  },
+  "results": [
+    {
+      "id": "F1",
+      "category": "grounded",
+      "question": "What does it mean for a response to be faithful in Ragas?",
+      "teardown_note": "Baseline: the definition sentence exists verbatim in the faithfulness docs; a working pipeline should retrieve it.",
+      "retrieval": [
+        {
+          "score": 1,
+          "doc": "howtos__migrations__migrate_from_v03_to_v04.md",
+          "heading": "# v0.4"
+        },
+        {
+          "score": 1,
+          "doc": "howtos__migrations__migrate_from_v03_to_v04.md",
+          "heading": "### Migration from v0.3 Custom Prompts"
+        },
+        {
+          "score": 0,
+          "doc": "community__index.md",
+          "heading": "# Source: vibrantlabsai/ragas docs/community/index.md"
+        }
+      ],
+      "runs": [
+        {
+          "run": 1,
+          "answer": "I don't know. The provided documentation excerpts show code examples related to the `faithful` concept (such as a custom prompt that checks \"if response is faithful to context\" and a `result.reason` mentioning \"Response is faithful to context\"), but they do not contain a definition or explanation of what it means for a response to be faithful in Ragas.",
+          "error": null,
+          "verdict": "REFUSED_SUBOPTIMAL",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        },
+        {
+          "run": 2,
+          "answer": "Based on the provided documentation excerpts, I don't know what it means for a response to be \"faithful\" in Ragas. The excerpts mention faithfulness (e.g., a prompt instruction \"Check if response is faithful to context\" and an output field `is_faithful`), but they do not define or explain the concept.",
+          "error": null,
+          "verdict": "REFUSED_SUBOPTIMAL",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        },
+        {
+          "run": 3,
+          "answer": "Based on the provided documentation excerpts, I don't know what it means for a response to be faithful in Ragas. The excerpts show code examples that reference faithfulness (e.g., \"Check if response is faithful to context\" and an `is_faithful` field), but they do not define or explain the concept.",
+          "error": null,
+          "verdict": "REFUSED_SUBOPTIMAL",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        }
+      ]
+    },
+    {
+      "id": "M1",
+      "category": "retrieval-miss",
+      "question": "Does Ragas support multimodal evaluation?",
+      "teardown_note": "The corpus documents MultiModalFaithfulness, but the bigram retriever scores the question at 0 ('multimodal evaluation' shares no bigram with 'MultiModalFaithfulness'). Tests miss-then-downstream behavior.",
+      "retrieval": [
+        {
+          "score": 0,
+          "doc": "community__index.md",
+          "heading": "# Source: vibrantlabsai/ragas docs/community/index.md"
+        },
+        {
+          "score": 0,
+          "doc": "community__index.md",
+          "heading": "# ❤️ Community"
+        },
+        {
+          "score": 0,
+          "doc": "community__index.md",
+          "heading": "## **💬 Discord community**"
+        }
+      ],
+      "runs": [
+        {
+          "run": 1,
+          "answer": "The provided documentation excerpts do not contain information about whether Ragas supports multimodal evaluation. I don't know the answer based on these excerpts.",
+          "error": null,
+          "verdict": "REFUSED_SUBOPTIMAL",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        },
+        {
+          "run": 2,
+          "answer": "I don't know. The provided documentation excerpts do not contain information about multimodal evaluation support.",
+          "error": null,
+          "verdict": "REFUSED_SUBOPTIMAL",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        },
+        {
+          "run": 3,
+          "answer": "I don't know. The provided documentation excerpts only describe the community and the Discord community, and do not contain information about whether Ragas supports multimodal evaluation.",
+          "error": null,
+          "verdict": "REFUSED_SUBOPTIMAL",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        }
+      ]
+    },
+    {
+      "id": "E1",
+      "category": "api-grounded",
+      "question": "How do you create an EvaluationDataset from a list of samples?",
+      "teardown_note": "API usage question; the constructor call appears in the eval-dataset concept page.",
+      "retrieval": [
+        {
+          "score": 2,
+          "doc": "howtos__integrations__llama_stack.md",
+          "heading": "# This function extracts the search results for the trace of each query"
+        },
+        {
+          "score": 1,
+          "doc": "concepts__components__eval_dataset.md",
+          "heading": "## Creating an Evaluation Dataset from SingleTurnSamples"
+        },
+        {
+          "score": 1,
+          "doc": "concepts__components__eval_dataset.md",
+          "heading": "# Sample 3"
+        }
+      ],
+      "runs": [
+        {
+          "run": 1,
+          "answer": "Based on the documentation, you can create an `EvaluationDataset` by passing a list of `SingleTurnSample` instances:\n\n```python\ndataset = EvaluationDataset(samples=[sample1, sample2, sample3])\n```\n\nYou can also create one from a list using `EvaluationDataset.from_list(samples)`, as shown in the Llama Stack integration example:\n\n```python\nragas_eval_dataset = EvaluationDataset.from_list(samples)\n```",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "GROUNDED_OK"
+        },
+        {
+          "run": 2,
+          "answer": "Based on the documentation excerpts, you create an `EvaluationDataset` by passing a list of `SingleTurnSample` instances:\n\n```python\ndataset = EvaluationDataset(samples=[sample1, sample2, sample3])\n```\n\nAlternatively, you can create one from a list using `EvaluationDataset.from_list(samples)`:\n\n```python\nragas_eval_dataset = EvaluationDataset.from_list(samples)\n```",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "GROUNDED_OK"
+        },
+        {
+          "run": 3,
+          "answer": "Based on the documentation excerpts, you can create an `EvaluationDataset` from a list of samples by passing a list of `SingleTurnSample` instances:\n\n```python\ndataset = EvaluationDataset(samples=[sample1, sample2, sample3])\n```\n\nAlternatively, you can use the `from_list` method:\n\n```python\nragas_eval_dataset = EvaluationDataset.from_list(samples)\n```",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "GROUNDED_OK"
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "category": "synonym-gap",
+      "question": "How can I check whether my chatbot is making things up instead of sticking to the retrieved documents?",
+      "teardown_note": "Synonym probe: the docs never say 'making things up'; they say claims must be supported by the retrieved context.",
+      "retrieval": [
+        {
+          "score": 1,
+          "doc": "concepts__metrics__available_metrics__noise_sensitivity.md",
+          "heading": "# Noise Sensitivity"
+        },
+        {
+          "score": 1,
+          "doc": "howtos__applications__evaluate-and-improve-rag.md",
+          "heading": "# Query the system"
+        },
+        {
+          "score": 1,
+          "doc": "howtos__applications__evaluate-and-improve-rag.md",
+          "heading": "# examples/ragas_examples/improve_rag/evals.py"
+        }
+      ],
+      "runs": [
+        {
+          "run": 1,
+          "answer": "Based on the provided documentation, you can check whether your chatbot is making things up instead of sticking to the retrieved documents by using the **Noise Sensitivity** metric.\n\n`NoiseSensitivity` measures how often a system makes errors by providing incorrect responses when utilizing either relevant or irrelevant retrieved documents. The score ranges from 0 to 1, with lower values indicating better performance. It is computed using the `user_input`, `reference`, `response`, and the `retrieved_contexts`.\n\nTo estimate noise sensitivity, each claim in the generated response is examined to determine whether it is correct based on the ground truth and whether it can be attributed to the relevant (or irrelevant) retrieved context. Ideally, all claims in the answer should be supported by the relevant retrieved context.\n\nThe formula for noise sensitivity (relevant) is:\n\n$$\n\\text{noise sensitivity (relevant)} = {|\\text{Total number of incorrect claims in response}| \\over |\\text{Total number of claims in the response}|}\n$$\n\nA lower score indicates better performance, meaning the chatbot is sticking to the retrieved documents rather than making things up.",
+          "error": null,
+          "verdict": "HALLUCINATED",
+          "reviewed_verdict": "HALLUCINATED"
+        },
+        {
+          "run": 2,
+          "answer": "Based on the provided documentation, you can use the `NoiseSensitivity` metric to check whether your chatbot is making things up instead of sticking to the retrieved documents.\n\n`NoiseSensitivity` measures how often a system makes errors by providing incorrect responses when utilizing either relevant or irrelevant retrieved documents. The score ranges from 0 to 1, with lower values indicating better performance. It is computed using the `user_input`, `reference`, `response`, and the `retrieved_contexts`.\n\nTo estimate noise sensitivity, each claim in the generated response is examined to determine whether it is correct based on the ground truth and whether it can be attributed to the relevant (or irrelevant) retrieved context. Ideally, all claims in the answer should be supported by the relevant retrieved context.\n\nThe formula is:\n\n$$\n\\text{noise sensitivity (relevant)} = {|\\text{Total number of incorrect claims in response}| \\over |\\text{Total number of claims in the response}|}\n$$",
+          "error": null,
+          "verdict": "HALLUCINATED",
+          "reviewed_verdict": "HALLUCINATED"
+        },
+        {
+          "run": 3,
+          "answer": "Based on the provided documentation, `NoiseSensitivity` can help you check whether your chatbot is making things up instead of sticking to the retrieved documents.\n\n`NoiseSensitivity` measures how often a system makes errors by providing incorrect responses when utilizing either relevant or irrelevant retrieved documents. The score ranges from 0 to 1, with lower values indicating better performance. It is computed using the `user_input`, `reference`, `response`, and the `retrieved_contexts`.\n\nTo estimate noise sensitivity, each claim in the generated response is examined to determine whether it is correct based on the ground truth and whether it can be attributed to the relevant (or irrelevant) retrieved context. Ideally, all claims in the answer should be supported by the relevant retrieved context.\n\nThe formula for noise sensitivity (relevant) is:\n\n$$\n\\text{noise sensitivity (relevant)} = {|\\text{Total number of incorrect claims in response}| \\over |\\text{Total number of claims in the response}|}\n$$",
+          "error": null,
+          "verdict": "HALLUCINATED",
+          "reviewed_verdict": "HALLUCINATED"
+        }
+      ]
+    },
+    {
+      "id": "C1",
+      "category": "cross-page",
+      "question": "What is the difference between the Faithfulness and FactualCorrectness metrics?",
+      "teardown_note": "Cross-page synthesis: the two definitions live on different docs pages; top-3 may surface only one.",
+      "retrieval": [
+        {
+          "score": 1,
+          "doc": "concepts__metrics__overview__index.md",
+          "heading": "#### 1. Discrete Metrics"
+        },
+        {
+          "score": 1,
+          "doc": "getstarted__rag_eval.md",
+          "heading": "## Evaluate"
+        },
+        {
+          "score": 1,
+          "doc": "howtos__customizations__metrics__metrics_language_adaptation.md",
+          "heading": "# Now use the adapted metric"
+        }
+      ],
+      "runs": [
+        {
+          "run": 1,
+          "answer": "Based on the provided documentation, I don't have enough information to explain the difference between the Faithfulness and FactualCorrectness metrics.\n\nThe excerpts mention both metrics (they appear together in the evaluate example and both are noted as using prompts internally), but they do not describe what each metric measures or how they differ conceptually. The documentation only shows:\n\n- Both are used together in evaluation: `metrics=[LLMContextRecall(), Faithfulness(), FactualCorrectness()]`\n- Both use internal prompts (FactualCorrectness uses a `prompt` for claim decomposition and an `nli_prompt` for verifying claims; Faithfulness is mentioned as similarly using two prompts)\n\nThe specific definitions and differences between the two metrics are not contained in these excerpts.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        },
+        {
+          "run": 2,
+          "answer": "Based on the provided documentation excerpts, I don't know the specific difference between the Faithfulness and FactualCorrectness metrics. The excerpts mention both metrics (e.g., they are used together in evaluation and both are described as having internal prompts), but they do not explain how the two metrics differ from each other.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        },
+        {
+          "run": 3,
+          "answer": "Based on the provided documentation excerpts, I don't have enough information to fully explain the difference between the Faithfulness and FactualCorrectness metrics.\n\nThe excerpts show that both metrics are used together in evaluation and both can be used for non-English language evaluation, but they don't provide a definition or detailed explanation of what each metric measures or how they differ.\n\nThe only related detail is from the language adaptation excerpt, which notes that \"Like Faithfulness, FactualCorrectness uses two prompts internally\" — but this describes a similarity (both use two prompts), not a difference.\n\nI don't know the specific difference between these two metrics based solely on the provided documentation.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        }
+      ]
+    },
+    {
+      "id": "R1",
+      "category": "refusal-control",
+      "question": "What does Ragas charge for an enterprise plan?",
+      "teardown_note": "Control: pricing is not in the public docs. The only correct behavior is refusal.",
+      "retrieval": [
+        {
+          "score": 0,
+          "doc": "community__index.md",
+          "heading": "# Source: vibrantlabsai/ragas docs/community/index.md"
+        },
+        {
+          "score": 0,
+          "doc": "community__index.md",
+          "heading": "# ❤️ Community"
+        },
+        {
+          "score": 0,
+          "doc": "community__index.md",
+          "heading": "## **💬 Discord community**"
+        }
+      ],
+      "runs": [
+        {
+          "run": 1,
+          "answer": "I don't know. The provided documentation excerpts do not contain information about enterprise plan pricing.",
+          "error": null,
+          "verdict": "REFUSED_OK",
+          "reviewed_verdict": "REFUSED_OK"
+        },
+        {
+          "run": 2,
+          "answer": "I don't know. The provided documentation excerpts do not contain information about enterprise plan pricing.",
+          "error": null,
+          "verdict": "REFUSED_OK",
+          "reviewed_verdict": "REFUSED_OK"
+        },
+        {
+          "run": 3,
+          "answer": "I don't know. The provided documentation excerpts discuss the Ragas community and Discord community, but they do not contain any information about enterprise plan pricing.",
+          "error": null,
+          "verdict": "REFUSED_OK",
+          "reviewed_verdict": "REFUSED_OK"
+        }
+      ]
+    },
+    {
+      "id": "T1",
+      "category": "api-grounded",
+      "question": "How do I generate synthetic test data with Ragas?",
+      "teardown_note": "The TestsetGenerator class is documented in the testset-generation guide.",
+      "retrieval": [
+        {
+          "score": 3,
+          "doc": "concepts__test_data_generation__agents.md",
+          "heading": "# Testset Generation for Agents or Tool use cases"
+        },
+        {
+          "score": 3,
+          "doc": "getstarted__quickstart.md",
+          "heading": "## What's Next?"
+        },
+        {
+          "score": 3,
+          "doc": "howtos__integrations___arize.md",
+          "heading": "## 4. Generate Your Synthetic Test Dataset"
+        }
+      ],
+      "runs": [
+        {
+          "run": 1,
+          "answer": "Based on the provided documentation, I can share the following about generating synthetic test data with Ragas:\n\nThe documentation describes Ragas as using \"a unique evolution-based synthetic data generation paradigm to generate questions that are of the highest quality which also ensures diversity of questions generated.\" Ragas by default uses OpenAI models under the hood, but you're free to use any model of your choice.\n\nThe example shows generating 100 data points using Ragas with the following code:\n\n```python\nfrom ragas.testset import TestsetGenerator\nfrom langchain_openai import ChatOpenAI, OpenAIEmbeddings\n\nTEST_SIZE = 25\n```\n\nSynthetic test data generation is framed as a solution to the tedious, expensive process of curating golden test datasets — it can \"reduce the time and effort in curating test data by 90%.\" An ideal test dataset should contain high quality, diverse data points from a distribution similar to production.\n\nHowever, the provided excerpts do not contain the complete code or step-by-step instructions for actually running the `TestsetGenerator` (e.g., the full setup of the generator, document loading into it, or the generation call). So I don't know the full procedure beyond what's shown above.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "GROUNDED_OK"
+        },
+        {
+          "run": 2,
+          "answer": "Based on the provided documentation excerpts, synthetic test data can be generated with Ragas as follows:\n\n1. **Prepare documents**: Load your source documents (the example uses `SimpleDirectoryReader` to read PDFs from a directory).\n\n2. **Generate the test set using `TestsetGenerator`**: Import it from `ragas.testset`, along with models such as `ChatOpenAI` and `OpenAIEmbeddings` from `langchain_openai`. You set a `TEST_SIZE` (e.g., 25 or 100 data points) and generate the data points.\n\nThe excerpts note that Ragas uses a \"unique evolution-based synthetic data generation paradigm\" to generate high-quality, diverse questions, and by default uses OpenAI models under the hood (though you can use any model of your choice).\n\nNote: The excerpts are truncated and do not show the actual code that calls the generator to produce the test set, so I don't know the exact invocation syntax beyond the imports and `TEST_SIZE` shown.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "GROUNDED_OK"
+        },
+        {
+          "run": 3,
+          "answer": "Based on the provided documentation excerpts, I can share the following about generating synthetic test data with Ragas:\n\n- Ragas uses a unique **evolution-based synthetic data generation paradigm** to generate high-quality questions while ensuring diversity of the questions generated.\n- Ragas by default uses **OpenAI models** under the hood, but you're free to use any model of your choice.\n- The relevant import shown is:\n  ```python\n  from ragas.testset import TestsetGenerator\n  from langchain_openai import ChatOpenAI, OpenAIEmbeddings\n  ```\n- The excerpt mentions generating **100 data points using Ragas**, though the code snippet shown sets `TEST_SIZE = 25`.\n\nThe excerpts do not contain a complete step-by-step walkthrough of the generation code itself (beyond the import and setup), so I don't know the full details of how to invoke the generator from the provided text alone.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "GROUNDED_OK"
+        }
+      ]
+    },
+    {
+      "id": "X1",
+      "category": "api-grounded",
+      "question": "How do I compare two prompts with an A/B test in Ragas?",
+      "teardown_note": "The experimentation docs describe the @experiment decorator and A/B testing.",
+      "retrieval": [
+        {
+          "score": 1,
+          "doc": "concepts__metrics__available_metrics__sql.md",
+          "heading": "### DataCompy Score"
+        },
+        {
+          "score": 1,
+          "doc": "howtos__applications__benchmark_llm.md",
+          "heading": "# Compare the two experiment results"
+        },
+        {
+          "score": 1,
+          "doc": "howtos__customizations__metrics__metrics_language_adaptation.md",
+          "heading": "## Adapting FactualCorrectness"
+        }
+      ],
+      "runs": [
+        {
+          "run": 1,
+          "answer": "I don't know. The provided documentation excerpts don't contain information about comparing two prompts with an A/B test in Ragas.",
+          "error": null,
+          "verdict": "REFUSED_SUBOPTIMAL",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        },
+        {
+          "run": 2,
+          "answer": "I don't know. The provided documentation excerpts don't contain information about how to compare two prompts with an A/B test in Ragas.",
+          "error": null,
+          "verdict": "REFUSED_SUBOPTIMAL",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        },
+        {
+          "run": 3,
+          "answer": "I don't know. The provided documentation excerpts discuss the DataCompy Score metric, comparing experiment results, and adapting FactualCorrectness, but they do not contain information on how to compare two prompts with an A/B test in Ragas.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "category": "grounded",
+      "question": "Which metric compares the generated response against a reference answer?",
+      "teardown_note": "Definition sentence exists verbatim in the factual-correctness docs.",
+      "retrieval": [
+        {
+          "score": 2,
+          "doc": "concepts__metrics__available_metrics__context_precision.md",
+          "heading": "### Context Precision"
+        },
+        {
+          "score": 2,
+          "doc": "concepts__metrics__available_metrics__context_precision.md",
+          "heading": "### Context Utilization"
+        },
+        {
+          "score": 2,
+          "doc": "concepts__metrics__available_metrics__factual_correctness.md",
+          "heading": "## Factual Correctness"
+        }
+      ],
+      "runs": [
+        {
+          "run": 1,
+          "answer": "Based on the provided documentation, the **Factual Correctness** metric compares the generated response against a reference answer. It \"compares and evaluates the factual accuracy of the generated `response` with the `reference`.\"",
+          "error": null,
+          "verdict": "HALLUCINATED",
+          "reviewed_verdict": "GROUNDED_OK"
+        },
+        {
+          "run": 2,
+          "answer": "Based on the provided documentation, the `FactualCorrectness` metric compares the generated response against a reference answer. It evaluates the factual accuracy of the generated `response` with the `reference`.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "GROUNDED_OK"
+        },
+        {
+          "run": 3,
+          "answer": "Based on the provided documentation, the `FactualCorrectness` metric compares and evaluates the factual accuracy of the generated `response` with the `reference`.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "GROUNDED_OK"
+        }
+      ]
+    },
+    {
+      "id": "V1",
+      "category": "api-grounded",
+      "question": "How do I migrate from Ragas 0.3 to 0.4?",
+      "teardown_note": "A migration guide exists in the docs; tests version-specific retrieval.",
+      "retrieval": [
+        {
+          "score": 1,
+          "doc": "concepts__metrics__available_metrics__agents.md",
+          "heading": "### Legacy API (Deprecated)"
+        },
+        {
+          "score": 1,
+          "doc": "concepts__metrics__available_metrics__agents.md",
+          "heading": "### Legacy API (Deprecated)"
+        },
+        {
+          "score": 1,
+          "doc": "concepts__metrics__available_metrics__agents.md",
+          "heading": "### Legacy API (Deprecated)"
+        }
+      ],
+      "runs": [
+        {
+          "run": 1,
+          "answer": "I don't know. The provided documentation excerpts only cover the deprecated legacy APIs for `TopicAdherenceScore`, `ToolCallAccuracy`, and `ToolCallF1` (noting migration to `ragas.metrics.collections` for v1.0), but they do not contain information about migrating from Ragas 0.3 to 0.4.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        },
+        {
+          "run": 2,
+          "answer": "I don't know. The provided documentation excerpts only cover the deprecated legacy APIs for `TopicAdherenceScore`, `ToolCallAccuracy`, and `ToolCallF1` (noting they'll be removed in v1.0 and should be migrated to `ragas.metrics.collections`), but they do not contain any information about migrating from Ragas 0.3 to 0.4.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        },
+        {
+          "run": 3,
+          "answer": "I don't know. The provided documentation excerpts only cover the deprecated legacy APIs for `TopicAdherenceScore`, `ToolCallAccuracy`, and `ToolCallF1`, including deprecation notices pointing to `ragas.metrics.collections` and example usage. They do not contain any migration guide for upgrading from Ragas 0.3 to 0.4.",
+          "error": null,
+          "verdict": "GROUNDED_OK",
+          "reviewed_verdict": "REFUSED_SUBOPTIMAL"
+        }
+      ]
+    }
+  ]
+}

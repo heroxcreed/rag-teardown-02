@@ -1,0 +1,2 @@
+# No third-party dependencies.
+# Python 3.8+ standard library only (urllib, json, argparse, re, os, sys, time).
