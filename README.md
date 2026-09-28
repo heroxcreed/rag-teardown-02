@@ -54,4 +54,4 @@ One reproducible example per signal, plus the controls that keep the interpretat
 - The corpus is a snapshot of **public** Ragas documentation (commit `298b682`); only markdown docs pages, no notebooks, no code. Nothing was taken from behind a login.
 - Corpus and questions are in English: this retrieval layer is language-sensitive; translating them changes the results.
 - This is a method demonstration, not an audit of Ragas or its documentation. It says nothing about any production system — including yours.
-- Contact: heroxcreed — heroxcreed275@gmail.com (email only, no calls).
+- Contact: heroxcreed — heroxcreed861@gmail.com (email only, no calls).
